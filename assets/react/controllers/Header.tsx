@@ -1,4 +1,4 @@
-import {AppBar, Badge, IconButton, Toolbar, Typography} from "@mui/material";
+import {AppBar, Badge, Grid, IconButton, Toolbar} from "@mui/material";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import StoreIcon from '@mui/icons-material/Store';
 import React from "react";
@@ -6,6 +6,10 @@ import {visit} from "@hotwired/turbo";
 import {ShoppingCartItem} from "../hooks/useShoppingCart";
 
 export default function Header({ shoppingCart }) {
+
+    const showHome = () => {
+        visit('/');
+    }
 
     const showShoppingCart = () => {
         visit('/shopping-cart');
@@ -18,20 +22,20 @@ export default function Header({ shoppingCart }) {
     return (
         <AppBar position="static">
             <Toolbar>
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    onClick={() => visit('/')}
-                    sx={{ mr: 2 }}
-                >
-                    <StoreIcon/>
-                </IconButton>
-                <IconButton onClick={showShoppingCart} color="inherit">
-                    <Badge badgeContent={calculateTotalQuantity()} color="secondary">
-                        <ShoppingBasketIcon />
-                    </Badge>
-                </IconButton>
+                <Grid container justifyContent="space-between" alignItems="center" style={{ width: '100%' }}>
+                    <Grid item>
+                        <IconButton edge="start" color="inherit" onClick={showHome}>
+                            <StoreIcon />
+                        </IconButton>
+                    </Grid>
+                    <Grid item>
+                        <IconButton color="inherit" onClick={showShoppingCart}>
+                            <Badge badgeContent={calculateTotalQuantity()} color="secondary">
+                                <ShoppingBasketIcon />
+                            </Badge>
+                        </IconButton>
+                    </Grid>
+                </Grid>
             </Toolbar>
         </AppBar>
     );

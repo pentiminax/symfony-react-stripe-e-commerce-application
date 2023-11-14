@@ -24,7 +24,7 @@ export default function Home() {
 
     return (
         <Container>
-            <Header shoppingCart={shoppingCartProps.shoppingCart?.items} />
+            <Header shoppingCart={shoppingCartProps.shoppingCart} />
             <Grid container marginTop={5}>
                 {products?.map((product) => (
                     <Grid item key={product.id} xs={4}>
@@ -35,21 +35,16 @@ export default function Home() {
                                     <Box component="img"
                                          sx={{ width: '100%', height: 'auto' }}
                                          src={`/images/products/${product.imageName}`}
-                                         alt="NikeCourt Zoom Vapor Cage"
+                                         alt={product.name}
                                     />
 
                                     <Typography variant="h6" gutterBottom>
                                         {product.name}
                                     </Typography>
 
-                                    <Rating name="read-only" value={5} readOnly />
-
                                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                         <Typography variant="h6" color="secondary">
                                             {product.price} €
-                                        </Typography>
-                                        <Typography variant="body1" sx={{ textDecoration: 'line-through' }}>
-                                            $250.00
                                         </Typography>
                                     </Box>
 
