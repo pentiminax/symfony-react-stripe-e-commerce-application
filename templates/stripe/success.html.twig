@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande reussie{% endblock %}
+
+{% block body %}
+    <div {{ react_component('Stripe/Success', {'amountTotal' : amountTotal}) }}></div>
+{% endblock %}

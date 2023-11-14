@@ -2,7 +2,7 @@ import {AppBar, Badge, Grid, IconButton, Toolbar} from "@mui/material";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import StoreIcon from '@mui/icons-material/Store';
 import React from "react";
-import {visit} from "@hotwired/turbo";
+import {visit} from "../../utils";
 import {ShoppingCartItem} from "../hooks/useShoppingCart";
 
 export default function Header({ shoppingCart }) {

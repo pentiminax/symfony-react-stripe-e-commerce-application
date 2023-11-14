@@ -1,7 +1,5 @@
 import React from 'react';
-import {Box, Paper, Typography, Button, Chip, Rating, Stack, Grid, Container} from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import {Box, Container, Typography} from '@mui/material';
 import Header from "./Header";
 import useShoppingCart from "../hooks/useShoppingCart";
 import useProducts from "../hooks/useProducts";
@@ -16,13 +14,28 @@ export interface Product {
 }
 
 export default function Home() {
-    const products = useProducts({ inShoppingCart: false })
-    const shoppingCartProps = useShoppingCart();
+    const products = useProducts();
+    const { addToShoppingCart, shoppingCart, loading } = useShoppingCart();
+
+    if (loading) {
+        return (
+            <Container>
+                <Header shoppingCart={shoppingCart} />
+                <Box marginTop={5}>
+                    <Typography variant="h5">Chargement...</Typography>
+                </Box>
+            </Container>
+        )
+    }
 
     return (
         <Container>
-            <Header shoppingCart={shoppingCartProps.shoppingCart} />
-            <ProductGrid products={products} shoppingCartProps={shoppingCartProps} />
+            <Header shoppingCart={shoppingCart} />
+            <ProductGrid
+                addToShoppingCart={addToShoppingCart}
+                products={products}
+                shoppingCart={shoppingCart}
+            />
         </Container>
     )
 }

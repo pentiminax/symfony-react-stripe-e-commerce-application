@@ -19,7 +19,29 @@ import {formatPrice} from "../../utils";
 
 
 export default function ShoppingCart() {
-    const shoppingCartProps = useShoppingCart();
+    const { shoppingCart, removeFromShoppingCart, loading} = useShoppingCart();
+
+    if (loading) {
+        return (
+            <Container>
+                <Header shoppingCart={shoppingCart} />
+                <Box marginTop={5}>
+                    <Typography variant="h5">Chargement...</Typography>
+                </Box>
+            </Container>
+        )
+    }
+
+    if (shoppingCart?.items.length === 0) {
+        return (
+            <Container>
+                <Header shoppingCart={shoppingCart} />
+                <Box marginTop={5}>
+                    <Typography variant="h5">Votre panier est vide</Typography>
+                </Box>
+            </Container>
+        )
+    }
 
     const proceedToCheckout = () => {
         fetch('/stripe/checkout-sessions')
@@ -29,7 +51,7 @@ export default function ShoppingCart() {
 
     return (
         <Container>
-            <Header shoppingCart={shoppingCartProps.shoppingCart} />
+            <Header shoppingCart={shoppingCart} />
             <Box marginTop={5}>
                 <Box marginBottom={3}>
                     <Grid container justifyContent="space-between" alignItems="center">
@@ -54,7 +76,7 @@ export default function ShoppingCart() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {shoppingCartProps.shoppingCart?.items.map(item => (
+                            {shoppingCart?.items.map(item => (
                                 <TableRow key={item.product.id}>
                                     <TableCell>
                                         <Box
@@ -75,7 +97,7 @@ export default function ShoppingCart() {
                                     <TableCell>{item.quantity}</TableCell>
                                     <TableCell>{formatPrice(item.product.price)}</TableCell>
                                     <TableCell>
-                                        <IconButton onClick={() => shoppingCartProps.removeFromShoppingCart(item.product)}>
+                                        <IconButton onClick={() => removeFromShoppingCart(item.product)}>
                                             <ClearIcon />
                                         </IconButton>
                                     </TableCell>

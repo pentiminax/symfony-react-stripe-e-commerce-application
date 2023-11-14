@@ -12,6 +12,7 @@ export interface ShoppingCartItem {
 
 export default function useShoppingCart() {
     const [shoppingCart, setShoppingCart] = React.useState<ShoppingCart | null>();
+    const [loading, setLoading] = React.useState(false);
 
     const addToShoppingCart = (product: Product) => {
         fetch(`/session/shopping-cart/${product.id}`, {
@@ -30,17 +31,22 @@ export default function useShoppingCart() {
     }
 
     React.useEffect(() => {
+        setLoading(true);
         fetch('/session/shopping-cart')
             .then(response => response.json())
             .then(json => {
                 setShoppingCart(json);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     }, []);
 
     const shoppingCartProps = {
         shoppingCart,
         addToShoppingCart,
-        removeFromShoppingCart
+        removeFromShoppingCart,
+        loading
     }
 
     return shoppingCartProps;

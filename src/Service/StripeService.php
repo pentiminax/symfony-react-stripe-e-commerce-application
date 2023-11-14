@@ -59,8 +59,16 @@ class StripeService
             'currency' => 'EUR',
             'line_items' => $lineItems,
             'mode' => 'payment',
-            'success_url' => 'https://127.0.0.1:8000',
+            'success_url' => 'https://127.0.0.1:8000/stripe/success?session_id={CHECKOUT_SESSION_ID}',
         ]);
+    }
+
+    /**
+     * @throws ApiErrorException
+     */
+    public function getCheckoutSession(string $sessionId): Session
+    {
+        return $this->getStripe()->checkout->sessions->retrieve($sessionId);
     }
 
     private function getStripe(): StripeClient

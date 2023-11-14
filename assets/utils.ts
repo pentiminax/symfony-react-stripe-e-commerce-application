@@ -3,3 +3,7 @@ export const formatPrice = (price: number) => {
 
     return formatter.format(price / 100);
 }
+
+export const visit = (url: string) => {
+    window.location.href = url
+}

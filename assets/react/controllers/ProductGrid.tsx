@@ -5,9 +5,9 @@ import React from "react";
 import {Product} from "./Home";
 import {formatPrice} from "../../utils";
 
-export default function ProductGrid({products, shoppingCartProps}) {
+export default function ProductGrid({ addToShoppingCart, products, shoppingCart}) {
     const isProductInShoppingCart = (product: Product) => {
-        return shoppingCartProps.shoppingCart?.items.some(item => item.product.id === product.id);
+        return shoppingCart?.items.some(item => item.product.id === product.id);
     }
 
     return (
@@ -39,7 +39,7 @@ export default function ProductGrid({products, shoppingCartProps}) {
                                     color="primary"
                                     endIcon={isProductInShoppingCart(product) ? <ShoppingBasketIcon /> : <AddIcon />}
                                     sx={{ mt: 1 }}
-                                    onClick={() => shoppingCartProps.addToShoppingCart(product)}
+                                    onClick={() => addToShoppingCart(product)}
                                 >
                                     {isProductInShoppingCart(product) ? 'Déjà dans le panier' : 'Ajouter au panier'}
                                 </Button>

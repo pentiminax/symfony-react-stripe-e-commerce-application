@@ -1,15 +1,11 @@
 import React from "react";
 import {Product} from "../controllers/Home";
 
-export default function useProducts({ inShoppingCart = false }: {inShoppingCart?: boolean}) {
+export default function useProducts() {
     const [products, setProducts] = React.useState<Product[]>([]);
 
-    const buildQueryString = () => {
-        return inShoppingCart ? "inShoppingCart=true" : "";
-    }
-
     React.useEffect(() => {
-        fetch(`/api/products?${buildQueryString()}`)
+        fetch(`/api/products`)
             .then(response => response.json())
             .then(json => setProducts(json));
     }, []);
