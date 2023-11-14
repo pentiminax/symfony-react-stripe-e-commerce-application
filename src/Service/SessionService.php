@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Product;
 use App\Model\ShoppingCart;
 use App\Model\ShoppingCartItem;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -22,20 +23,10 @@ readonly class SessionService
         return $this->getSession()->get(self::SHOPPING_CART, new ShoppingCart());
     }
 
-    public function getShoppingCartProductIds(): array
-    {
-        $productIds = [];
-
-        foreach ($this->getShoppingCart() as $product) {
-            $productIds[] = $product;
-        }
-
-        return $productIds;
-    }
-
     public function addToShoppingCart(Product $product, int $quantity = 1): void
     {
         $shoppingCart = $this->getShoppingCart();
+
         $existingShoppingCardItem = $this->getExistingShoppingCardItem($product);
 
         if ($existingShoppingCardItem) {
@@ -58,6 +49,9 @@ readonly class SessionService
         }
 
         $shoppingCart->items->removeElement($existingShoppingCardItem);
+
+        $reindexedItems = array_values($shoppingCart->items->toArray());
+        $shoppingCart->items = new ArrayCollection($reindexedItems);
 
         $this->getSession()->set(self::SHOPPING_CART, $shoppingCart);
     }

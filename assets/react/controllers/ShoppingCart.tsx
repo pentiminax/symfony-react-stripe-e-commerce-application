@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import LockIcon from '@mui/icons-material/Lock';
+import {formatPrice} from "../../utils";
 
 
 export default function ShoppingCart() {
@@ -72,7 +73,7 @@ export default function ShoppingCart() {
                                         </Box>
                                     </TableCell>
                                     <TableCell>{item.quantity}</TableCell>
-                                    <TableCell>{item.product.price} €</TableCell>
+                                    <TableCell>{formatPrice(item.product.price)}</TableCell>
                                     <TableCell>
                                         <IconButton onClick={() => shoppingCartProps.removeFromShoppingCart(item.product)}>
                                             <ClearIcon />
