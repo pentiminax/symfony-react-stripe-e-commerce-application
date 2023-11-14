@@ -10,6 +10,12 @@ export default function ProductGrid({ addToShoppingCart, products, shoppingCart}
         return shoppingCart?.items.some(item => item.product.id === product.id);
     }
 
+    const getProductLabel = (product: Product) => {
+        const productInShoppingCart = shoppingCart?.items?.find((item) => item.product.id === product.id);
+
+        return productInShoppingCart ? `${productInShoppingCart.quantity} x`  : 'Ajouter au panier';
+    }
+
     return (
         <Grid container marginTop={5}>
             {products?.map((product) => (
@@ -41,7 +47,7 @@ export default function ProductGrid({ addToShoppingCart, products, shoppingCart}
                                     sx={{ mt: 1 }}
                                     onClick={() => addToShoppingCart(product)}
                                 >
-                                    {isProductInShoppingCart(product) ? 'Déjà dans le panier' : 'Ajouter au panier'}
+                                    {getProductLabel(product)}
                                 </Button>
 
                             </Stack>
