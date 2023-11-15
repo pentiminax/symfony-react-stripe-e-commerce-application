@@ -1,5 +1,5 @@
 import React from "react";
-import {Product} from "../controllers/Home";
+import {Product} from "./useProducts";
 
 export interface ShoppingCart {
     items: ShoppingCartItem[];
