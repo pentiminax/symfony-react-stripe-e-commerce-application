@@ -5,20 +5,13 @@ namespace App\Controller\Admin;
 use App\Entity\Product;
 use App\Service\StripeService;
 use Doctrine\ORM\EntityManagerInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Stripe\Exception\ApiErrorException;
-use Symfony\Component\Asset\Package;
-use Symfony\Component\Asset\Packages;
-use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
-use Symfony\Component\HttpFoundation\UrlHelper;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ProductCrudController extends AbstractCrudController

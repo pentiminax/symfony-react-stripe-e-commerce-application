@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Repository\ProductRepository;
 use App\Service\SessionService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
