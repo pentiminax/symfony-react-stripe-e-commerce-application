@@ -42,12 +42,10 @@ export default function useShoppingCart() {
             });
     }, []);
 
-    const shoppingCartProps = {
+    return {
         shoppingCart,
         addToShoppingCart,
         removeFromShoppingCart,
         loading
-    }
-
-    return shoppingCartProps;
+    };
 }
