@@ -22,7 +22,7 @@ class StripeService
         return $this->getStripe()->products->create([
             'name' => $product->getName(),
             'description' => $product->getDescription(),
-            'active' => $product->isActive()
+            'active' => $product->isActive(),
         ]);
     }
 
@@ -69,6 +69,18 @@ class StripeService
     public function getCheckoutSession(string $sessionId): Session
     {
         return $this->getStripe()->checkout->sessions->retrieve($sessionId);
+    }
+
+    /**
+     * @throws ApiErrorException
+     */
+    public function updateProduct(Product $product): \Stripe\Product
+    {
+        return $this->getStripe()->products->update($product->getStripeProductId(), [
+            'name' => $product->getName(),
+            'description' => $product->getDescription(),
+            'active' => $product->isActive(),
+        ]);
     }
 
     private function getStripe(): StripeClient
