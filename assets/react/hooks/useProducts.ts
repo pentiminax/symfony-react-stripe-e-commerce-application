@@ -1,5 +1,12 @@
 import React from "react";
-import {Product} from "../controllers/Home";
+
+export interface Product {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    imageName: string;
+}
 
 export default function useProducts() {
     const [products, setProducts] = React.useState<Product[]>([]);

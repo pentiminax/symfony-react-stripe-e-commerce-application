@@ -2,8 +2,8 @@ import {Box, Button, Grid, Paper, Stack, Typography} from "@mui/material";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import AddIcon from "@mui/icons-material/Add";
 import React from "react";
-import {Product} from "./Home";
 import {formatPrice} from "../../utils";
+import {Product} from "../hooks/useProducts";
 
 export default function ProductGrid({ addToShoppingCart, products, shoppingCart}) {
     const isProductInShoppingCart = (product: Product) => {

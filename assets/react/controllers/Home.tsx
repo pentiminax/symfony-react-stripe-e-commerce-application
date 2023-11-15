@@ -5,14 +5,6 @@ import useShoppingCart from "../hooks/useShoppingCart";
 import useProducts from "../hooks/useProducts";
 import ProductGrid from "./ProductGrid";
 
-export interface Product {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    imageName: string;
-}
-
 export default function Home() {
     const products = useProducts();
     const { addToShoppingCart, shoppingCart, loading } = useShoppingCart();

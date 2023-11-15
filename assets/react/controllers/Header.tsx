@@ -6,7 +6,6 @@ import {visit} from "../../utils";
 import {ShoppingCartItem} from "../hooks/useShoppingCart";
 
 export default function Header({ shoppingCart }) {
-
     const showHome = () => {
         visit('/');
     }
