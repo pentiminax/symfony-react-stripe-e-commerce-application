@@ -86,7 +86,7 @@ class StripeService
     private function getStripe(): StripeClient
     {
         return $this->stripe ??= new StripeClient(
-            $_ENV['API_SECRET']
+            $_ENV['STRIPE_API_SECRET']
         );
     }
 }
